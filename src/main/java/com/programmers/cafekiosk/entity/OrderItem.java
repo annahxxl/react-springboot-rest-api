@@ -15,9 +15,9 @@ public class OrderItem {
 
     private String name;
 
-    private long price;
+    private Long price;
 
-    private int quantity;
+    private Integer quantity;
 
     @ManyToOne
     @JoinColumn(name = "item_id") //! FK
