@@ -1,6 +1,7 @@
 package com.programmers.cafekiosk.entity;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -16,6 +17,7 @@ public class Order {
 
     private Long totalPrice;
 
+    @CreatedDate
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "order")
