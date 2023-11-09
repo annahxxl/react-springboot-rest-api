@@ -39,6 +39,7 @@ public class ItemService {
         return itemRepository.save(item).getId();
     }
 
+    @Transactional(readOnly = true)
     public ItemResponse getItem(Long id) {
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
