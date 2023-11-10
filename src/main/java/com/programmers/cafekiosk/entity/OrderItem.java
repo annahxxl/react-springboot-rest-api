@@ -1,9 +1,11 @@
 package com.programmers.cafekiosk.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
 @Table(name = "order_items")
+@Getter
 public class OrderItem {
 
     @Id
@@ -26,4 +28,13 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "order_id") //! FK
     private Order order;
+
+    public OrderItem(ItemType type, String name, Long price, Integer quantity, Item item, Order order) {
+        this.type = type;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.item = item;
+        this.order = order;
+    }
 }
