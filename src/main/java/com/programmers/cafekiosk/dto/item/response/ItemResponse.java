@@ -1,7 +1,7 @@
-package com.programmers.cafekiosk.dto;
+package com.programmers.cafekiosk.dto.item.response;
 
-import com.programmers.cafekiosk.entity.ItemStatus;
-import com.programmers.cafekiosk.entity.ItemType;
+import com.programmers.cafekiosk.entity.item.ItemStatus;
+import com.programmers.cafekiosk.entity.item.ItemType;
 
 import java.time.LocalDateTime;
 

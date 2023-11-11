@@ -1,6 +1,6 @@
-package com.programmers.cafekiosk.dto;
+package com.programmers.cafekiosk.dto.orderItem;
 
-import com.programmers.cafekiosk.entity.ItemType;
+import com.programmers.cafekiosk.entity.item.ItemType;
 
 public record OrderItemResponse(Long id, ItemType type, String name, Long price, Integer quantity) {
 

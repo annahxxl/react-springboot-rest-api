@@ -1,7 +1,7 @@
-package com.programmers.cafekiosk.repository;
+package com.programmers.cafekiosk.repository.item;
 
-import com.programmers.cafekiosk.dto.GetItemsRequest;
-import com.programmers.cafekiosk.entity.Item;
+import com.programmers.cafekiosk.dto.item.request.GetItemsRequest;
+import com.programmers.cafekiosk.entity.item.Item;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.programmers.cafekiosk.entity.QItem.item;
+import static com.programmers.cafekiosk.entity.item.QItem.item;
 
 @Component
 public class ItemQuerydslRepository {

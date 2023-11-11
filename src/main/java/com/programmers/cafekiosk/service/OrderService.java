@@ -1,12 +1,16 @@
 package com.programmers.cafekiosk.service;
 
-import com.programmers.cafekiosk.dto.*;
-import com.programmers.cafekiosk.entity.Item;
-import com.programmers.cafekiosk.entity.ItemStatus;
+import com.programmers.cafekiosk.dto.orderItem.CreateOrderItemRequest;
+import com.programmers.cafekiosk.dto.item.request.GetItemsRequest;
+import com.programmers.cafekiosk.dto.order.CreateOrderRequest;
+import com.programmers.cafekiosk.dto.order.OrderResponse;
+import com.programmers.cafekiosk.dto.orderItem.OrderItemResponse;
+import com.programmers.cafekiosk.entity.item.Item;
+import com.programmers.cafekiosk.entity.item.ItemStatus;
 import com.programmers.cafekiosk.entity.Order;
 import com.programmers.cafekiosk.entity.OrderItem;
 import com.programmers.cafekiosk.exception.NotFoundException;
-import com.programmers.cafekiosk.repository.ItemQuerydslRepository;
+import com.programmers.cafekiosk.repository.item.ItemQuerydslRepository;
 import com.programmers.cafekiosk.repository.OrderItemRepository;
 import com.programmers.cafekiosk.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,7 @@
 package com.programmers.cafekiosk.entity;
 
+import com.programmers.cafekiosk.entity.item.Item;
+import com.programmers.cafekiosk.entity.item.ItemType;
 import jakarta.persistence.*;
 import lombok.Getter;
 

@@ -1,7 +1,7 @@
 package com.programmers.cafekiosk.controller;
 
-import com.programmers.cafekiosk.dto.CreateOrderRequest;
-import com.programmers.cafekiosk.dto.OrderResponse;
+import com.programmers.cafekiosk.dto.order.CreateOrderRequest;
+import com.programmers.cafekiosk.dto.order.OrderResponse;
 import com.programmers.cafekiosk.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

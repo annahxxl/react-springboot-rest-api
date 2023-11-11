@@ -1,4 +1,4 @@
-package com.programmers.cafekiosk.dto;
+package com.programmers.cafekiosk.dto.orderItem;
 
 import jakarta.validation.constraints.NotNull;
 

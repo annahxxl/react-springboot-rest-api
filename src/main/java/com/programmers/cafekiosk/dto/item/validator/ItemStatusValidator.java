@@ -1,6 +1,6 @@
-package com.programmers.cafekiosk.dto;
+package com.programmers.cafekiosk.dto.item.validator;
 
-import com.programmers.cafekiosk.entity.ItemStatus;
+import com.programmers.cafekiosk.entity.item.ItemStatus;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

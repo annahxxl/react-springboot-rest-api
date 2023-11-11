@@ -1,6 +1,7 @@
-package com.programmers.cafekiosk.dto;
+package com.programmers.cafekiosk.dto.item.request;
 
-import com.programmers.cafekiosk.entity.ItemType;
+import com.programmers.cafekiosk.dto.item.validator.ValidItemType;
+import com.programmers.cafekiosk.entity.item.ItemType;
 import jakarta.validation.constraints.NotNull;
 
 public record CreateItemRequest(

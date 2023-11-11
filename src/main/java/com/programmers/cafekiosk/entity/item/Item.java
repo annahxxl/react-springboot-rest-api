@@ -1,6 +1,6 @@
-package com.programmers.cafekiosk.entity;
+package com.programmers.cafekiosk.entity.item;
 
-import com.programmers.cafekiosk.dto.UpdateItemRequest;
+import com.programmers.cafekiosk.dto.item.request.UpdateItemRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

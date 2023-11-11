@@ -1,9 +1,9 @@
 package com.programmers.cafekiosk.controller;
 
-import com.programmers.cafekiosk.dto.CreateItemRequest;
-import com.programmers.cafekiosk.dto.GetItemsRequest;
-import com.programmers.cafekiosk.dto.ItemResponse;
-import com.programmers.cafekiosk.dto.UpdateItemRequest;
+import com.programmers.cafekiosk.dto.item.request.CreateItemRequest;
+import com.programmers.cafekiosk.dto.item.request.GetItemsRequest;
+import com.programmers.cafekiosk.dto.item.response.ItemResponse;
+import com.programmers.cafekiosk.dto.item.request.UpdateItemRequest;
 import com.programmers.cafekiosk.service.ItemService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
