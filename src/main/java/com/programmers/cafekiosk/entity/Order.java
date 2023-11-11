@@ -31,8 +31,4 @@ public class Order {
     public Order(Long totalPrice) {
         this.totalPrice = totalPrice;
     }
-
-    public void updateTotalPrice(Long totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 }
