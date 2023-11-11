@@ -60,6 +60,7 @@ public class Item {
 
     public void update(UpdateItemRequest request) {
         this.type = request.type();
+        this.status = request.status();
         this.name = request.name();
         this.price = request.price();
         this.description = request.description();
