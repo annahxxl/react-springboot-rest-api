@@ -31,6 +31,10 @@ public class ItemQuerydslRepository {
             builder.and(item.status.eq(request.status()));
         }
 
+        if (request.ids() != null) {
+            builder.and(item.id.in(request.ids()));
+        }
+
         return queryFactory
                 .selectFrom(item)
                 .where(builder)

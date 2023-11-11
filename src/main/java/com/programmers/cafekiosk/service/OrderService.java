@@ -1,14 +1,13 @@
 package com.programmers.cafekiosk.service;
 
-import com.programmers.cafekiosk.dto.CreateOrderItemRequest;
-import com.programmers.cafekiosk.dto.CreateOrderRequest;
-import com.programmers.cafekiosk.dto.OrderItemResponse;
-import com.programmers.cafekiosk.dto.OrderResponse;
+import com.programmers.cafekiosk.dto.*;
 import com.programmers.cafekiosk.entity.Item;
+import com.programmers.cafekiosk.entity.ItemStatus;
 import com.programmers.cafekiosk.entity.Order;
 import com.programmers.cafekiosk.entity.OrderItem;
 import com.programmers.cafekiosk.exception.NotFoundException;
-import com.programmers.cafekiosk.repository.ItemRepository;
+import com.programmers.cafekiosk.repository.ItemQuerydslRepository;
+import com.programmers.cafekiosk.repository.OrderItemRepository;
 import com.programmers.cafekiosk.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +23,14 @@ import java.util.stream.Collectors;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final ItemRepository itemRepository;
+    private final ItemQuerydslRepository itemQuerydslRepository;
+    private final OrderItemRepository orderItemRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, ItemRepository itemRepository) {
+    public OrderService(OrderRepository orderRepository, ItemQuerydslRepository itemQuerydslRepository, OrderItemRepository orderItemRepository) {
         this.orderRepository = orderRepository;
-        this.itemRepository = itemRepository;
+        this.itemQuerydslRepository = itemQuerydslRepository;
+        this.orderItemRepository = orderItemRepository;
     }
 
     @Transactional(readOnly = true)
@@ -52,41 +53,45 @@ public class OrderService {
         );
     }
 
-    public Long createOrder(CreateOrderRequest request) {
-        Set<Long> itemIds = request.orderitems().stream()
+    private Map<Long, Item> getAvailableItemsMap(List<CreateOrderItemRequest> request) {
+        Set<Long> ids = request.stream()
                 .map(CreateOrderItemRequest::id)
                 .collect(Collectors.toSet());
 
-        List<Item> items = itemRepository.findAllById(itemIds);
-
-        Map<Long, Item> itemMap = items.stream()
+        Map<Long, Item> itemsMap = itemQuerydslRepository.findAll(new GetItemsRequest(null, ItemStatus.AVAILABLE, ids)).stream()
                 .collect(Collectors.toMap(Item::getId, item -> item));
 
-        if (itemMap.size() != itemIds.size()) {
+        if(itemsMap.size() != ids.size()) {
             throw new NotFoundException("존재하지 않는 상품이 포함되어 있습니다.");
         }
 
-        Order order = new Order();
-        long totalPrice = 0L;
+        return itemsMap;
+    }
 
-        for (CreateOrderItemRequest orderItemRequest : request.orderitems()) {
-            Item item = itemMap.get(orderItemRequest.id());
+    private Long calculateTotalPrice(List<CreateOrderItemRequest> request, Map<Long, Item> itemsMap) {
+        return request.stream()
+                .mapToLong(createOrderItemRequest -> itemsMap.get(createOrderItemRequest.id()).getPrice() * createOrderItemRequest.quantity())
+                .sum();
+    }
 
-            totalPrice += (long) item.getPrice() * orderItemRequest.quantity();
+    public Long createOrder(CreateOrderRequest request) {
+        Map<Long, Item> itemsMap = getAvailableItemsMap(request.orderitems());
+        Order order = new Order(calculateTotalPrice(request.orderitems(), itemsMap));
+
+        for (CreateOrderItemRequest createOrderItemRequest : request.orderitems()) {
+            Item item = itemsMap.get(createOrderItemRequest.id());
 
             OrderItem orderItem = new OrderItem(
                     item.getType(),
                     item.getName(),
-                    (long) item.getPrice(),
-                    orderItemRequest.quantity(),
+                    item.getPrice(),
+                    createOrderItemRequest.quantity(),
                     item,
                     order
             );
 
-            order.addOrderItem(orderItem);
+            orderItemRepository.save(orderItem);
         }
-
-        order.updateTotalPrice(totalPrice);
 
         return orderRepository.save(order).getId();
     }
