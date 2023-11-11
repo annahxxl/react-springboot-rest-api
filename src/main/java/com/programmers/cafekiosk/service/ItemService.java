@@ -41,7 +41,7 @@ public class ItemService {
 
     @Transactional(readOnly = true)
     public ItemResponse getItem(Long id) {
-        Item item = itemRepository.findById(id)
+                Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
         return ItemResponse.from(
                 item.getId(),
