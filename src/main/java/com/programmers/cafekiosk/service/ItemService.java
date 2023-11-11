@@ -6,6 +6,7 @@ import com.programmers.cafekiosk.dto.ItemResponse;
 import com.programmers.cafekiosk.dto.UpdateItemRequest;
 import com.programmers.cafekiosk.entity.Item;
 import com.programmers.cafekiosk.entity.ItemStatus;
+import com.programmers.cafekiosk.exception.NotFoundException;
 import com.programmers.cafekiosk.repository.ItemQuerydslRepository;
 import com.programmers.cafekiosk.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,8 @@ public class ItemService {
 
     @Transactional(readOnly = true)
     public ItemResponse getItem(Long id) {
-                Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("존재하지 않는 상품입니다."));
         return ItemResponse.from(
                 item.getId(),
                 item.getType(),
@@ -73,13 +74,13 @@ public class ItemService {
 
     public void updateItem(Long id, UpdateItemRequest request) {
         Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
+                .orElseThrow(() -> new NotFoundException("존재하지 않는 상품입니다."));
         item.update(request);
     }
 
     public void deleteItem(Long id) {
         itemRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
+                .orElseThrow(() -> new NotFoundException("존재하지 않는 상품입니다."));
         itemRepository.deleteById(id);
     }
 }

@@ -7,6 +7,7 @@ import com.programmers.cafekiosk.dto.OrderResponse;
 import com.programmers.cafekiosk.entity.Item;
 import com.programmers.cafekiosk.entity.Order;
 import com.programmers.cafekiosk.entity.OrderItem;
+import com.programmers.cafekiosk.exception.NotFoundException;
 import com.programmers.cafekiosk.repository.ItemRepository;
 import com.programmers.cafekiosk.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class OrderService {
     @Transactional(readOnly = true)
     public OrderResponse getOrder(Long id) {
         Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 주문입니다."));
+                .orElseThrow(() -> new NotFoundException("존재하지 않는 주문입니다."));
         return OrderResponse.from(
                 order.getId(),
                 order.getTotalPrice(),
@@ -62,7 +63,7 @@ public class OrderService {
                 .collect(Collectors.toMap(Item::getId, item -> item));
 
         if (itemMap.size() != itemIds.size()) {
-            throw new IllegalArgumentException("존재하지 않는 상품이 포함되어 있습니다.");
+            throw new NotFoundException("존재하지 않는 상품이 포함되어 있습니다.");
         }
 
         Order order = new Order();
