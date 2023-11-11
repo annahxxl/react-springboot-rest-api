@@ -3,7 +3,6 @@ package com.programmers.cafekiosk.entity;
 import com.programmers.cafekiosk.dto.UpdateItemRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -14,7 +13,6 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "items")
 @Getter
-@NoArgsConstructor
 public class Item {
 
     @Id
@@ -29,7 +27,7 @@ public class Item {
 
     private String name;
 
-    private Integer price;
+    private Long price;
 
     private String description;
 
@@ -39,7 +37,10 @@ public class Item {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public Item(Long id, ItemType type, ItemStatus status, String name, Integer price, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    protected Item() {
+    }
+
+    public Item(Long id, ItemType type, ItemStatus status, String name, Long price, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.type = type;
         this.status = status;
@@ -50,7 +51,7 @@ public class Item {
         this.updatedAt = updatedAt;
     }
 
-    public Item(ItemType type, ItemStatus status, String name, Integer price, String description) {
+    public Item(ItemType type, ItemStatus status, String name, Long price, String description) {
         this.type = type;
         this.status = status;
         this.name = name;
