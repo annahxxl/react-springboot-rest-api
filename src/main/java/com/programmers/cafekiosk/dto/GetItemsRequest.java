@@ -5,5 +5,14 @@ import com.programmers.cafekiosk.entity.ItemType;
 
 import java.util.Set;
 
-public record GetItemsRequest(ItemType type, ItemStatus status, Set<Long> ids) {
+public record GetItemsRequest(
+
+        @ValidItemType
+        ItemType type,
+
+        @ValidItemStatus
+        ItemStatus status,
+
+        Set<Long> ids
+) {
 }

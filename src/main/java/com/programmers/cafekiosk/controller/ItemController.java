@@ -5,6 +5,7 @@ import com.programmers.cafekiosk.dto.GetItemsRequest;
 import com.programmers.cafekiosk.dto.ItemResponse;
 import com.programmers.cafekiosk.dto.UpdateItemRequest;
 import com.programmers.cafekiosk.service.ItemService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class ItemController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createItem(@RequestBody CreateItemRequest request) {
+    public ResponseEntity<Long> createItem(@Valid @RequestBody CreateItemRequest request) {
         Long itemId = itemService.createItem(request);
         return ResponseEntity.created(URI.create("/items/" + itemId)).body(itemId);
     }
@@ -42,7 +43,7 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateItem(@PathVariable Long id, @RequestBody UpdateItemRequest request) {
+    public ResponseEntity<Void> updateItem(@PathVariable Long id, @Valid @RequestBody UpdateItemRequest request) {
         itemService.updateItem(id, request);
         return ResponseEntity.noContent().build();
     }

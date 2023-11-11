@@ -3,6 +3,7 @@ package com.programmers.cafekiosk.controller;
 import com.programmers.cafekiosk.dto.CreateOrderRequest;
 import com.programmers.cafekiosk.dto.OrderResponse;
 import com.programmers.cafekiosk.service.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createOrder(@RequestBody CreateOrderRequest request) {
+    public ResponseEntity<Long> createOrder(@Valid @RequestBody CreateOrderRequest request) {
         Long orderId = orderService.createOrder(request);
         return ResponseEntity.created(URI.create("/orders/" + orderId)).body(orderId);
     }

@@ -1,4 +1,13 @@
 package com.programmers.cafekiosk.dto;
 
-public record CreateOrderItemRequest(Long id, Integer quantity) {
+import jakarta.validation.constraints.NotNull;
+
+public record CreateOrderItemRequest(
+
+        @NotNull
+        Long id,
+
+        @NotNull
+        Integer quantity
+) {
 }
