@@ -14,21 +14,25 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ItemType type;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private Long price;
 
+    @Column(nullable = false)
     private Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name = "item_id") //! FK
+    @JoinColumn(name = "item_id", nullable = false) //! FK
     private Item item;
 
     @ManyToOne
-    @JoinColumn(name = "order_id") //! FK
+    @JoinColumn(name = "order_id", nullable = false) //! FK
     private Order order;
 
     protected OrderItem() {

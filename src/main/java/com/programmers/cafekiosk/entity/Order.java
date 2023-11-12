@@ -17,8 +17,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Long totalPrice;
 
+    @Column(nullable = false, updatable = false)
     @CreatedDate
     private LocalDateTime createdAt = LocalDateTime.now();
 

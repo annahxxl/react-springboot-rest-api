@@ -19,21 +19,27 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ItemType type;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ItemStatus status;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private Long price;
 
     private String description;
 
+    @Column(nullable = false, updatable = false)
     @CreatedDate
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
@@ -65,5 +71,6 @@ public class Item {
         this.name = request.name();
         this.price = request.price();
         this.description = request.description();
+        this.updatedAt = LocalDateTime.now();
     }
 }
