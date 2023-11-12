@@ -43,7 +43,6 @@ Content-Type: application/json
   "description": "콜드브루입니다."
 }
 
-
 ### 상품 목록 조회
 GET http://localhost:8080/items
 Content-Type: application/json
@@ -55,9 +54,6 @@ Content-Type: application/json
 ### 판매중인 음료 상품 목록 조회
 GET http://localhost:8080/items?status=AVAILABLE&type=BEVERAGE
 Content-Type: application/json
-
-### 딸기케이크 삭제
-DELETE http://localhost:8080/items/3
 
 ### 주문 생성
 POST http://localhost:8080/orders
