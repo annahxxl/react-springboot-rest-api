@@ -37,7 +37,8 @@ public class ItemController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ItemResponse>> getItems(GetItemsRequest request) {
+    public ResponseEntity<List<ItemResponse>> getItems(@ModelAttribute GetItemsRequest request) {
+        System.out.println("request = " + request);
         List<ItemResponse> items = itemService.getItems(request);
         return ResponseEntity.ok(items);
     }
