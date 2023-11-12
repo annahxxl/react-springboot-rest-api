@@ -94,7 +94,7 @@ public class OrderService {
                     order
             );
 
-            orderItemRepository.save(orderItem);
+            order.addOrderItem(orderItem);
         }
 
         return orderRepository.save(order).getId();

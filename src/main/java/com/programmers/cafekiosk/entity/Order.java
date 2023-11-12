@@ -33,4 +33,8 @@ public class Order {
     public Order(Long totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+    }
 }
