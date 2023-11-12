@@ -1,0 +1,77 @@
+### 아메리카노 생성
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "type": "BEVERAGE",
+  "name": "아메리카노",
+  "price": 5000,
+  "description": "아메리카노입니다."
+}
+
+### 콜드브루 생성
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "type": "BEVERAGE",
+  "name": "콜드브루",
+  "price": 6000,
+  "description": "콜드브루입니다."
+}
+
+### 딸기케이크 생성
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "type": "FOOD",
+  "name": "딸기케이크",
+  "price": 6500,
+  "description": "딸기케이크입니다."
+}
+
+### 콜드브루 판매 중지
+PUT http://localhost:8080/items/2
+Content-Type: application/json
+
+{
+  "type": "BEVERAGE",
+  "status": "SOLD_OUT",
+  "name": "콜드브루",
+  "price": 6000,
+  "description": "콜드브루입니다."
+}
+
+
+### 상품 목록 조회
+GET http://localhost:8080/items
+Content-Type: application/json
+
+### 판매중인 상품 목록 조회
+GET http://localhost:8080/items?status=AVAILABLE
+Content-Type: application/json
+
+### 판매중인 음료 상품 목록 조회
+GET http://localhost:8080/items?status=AVAILABLE&type=BEVERAGE
+Content-Type: application/json
+
+### 딸기케이크 삭제
+DELETE http://localhost:8080/items/3
+
+### 주문 생성
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "orderitems": [
+    {
+      "id": 1,
+      "quantity": 2
+    }
+  ]
+}
+
+### 주문 단일 조회
+GET http://localhost:8080/orders/1
+Content-Type: application/json
