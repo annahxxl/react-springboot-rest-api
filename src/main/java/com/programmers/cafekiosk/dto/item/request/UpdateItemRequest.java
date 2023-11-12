@@ -9,11 +9,11 @@ import jakarta.validation.constraints.NotNull;
 
 public record UpdateItemRequest(
 
-        @NotBlank
+        @NotNull
         @ValidItemType
         ItemType type,
 
-        @NotBlank
+        @NotNull
         @ValidItemStatus
         ItemStatus status,
 
