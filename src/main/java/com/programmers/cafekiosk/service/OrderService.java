@@ -30,10 +30,9 @@ public class OrderService {
     private final ItemQuerydslRepository itemQuerydslRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, ItemQuerydslRepository itemQuerydslRepository, OrderItemRepository orderItemRepository) {
+    public OrderService(OrderRepository orderRepository, ItemQuerydslRepository itemQuerydslRepository) {
         this.orderRepository = orderRepository;
         this.itemQuerydslRepository = itemQuerydslRepository;
-        this.orderItemRepository = orderItemRepository;
     }
 
     @Transactional(readOnly = true)
