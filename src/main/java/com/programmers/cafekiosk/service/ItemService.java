@@ -44,31 +44,13 @@ public class ItemService {
     public ItemResponse getItem(Long id) {
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("존재하지 않는 상품입니다."));
-        return ItemResponse.from(
-                item.getId(),
-                item.getType(),
-                item.getStatus(),
-                item.getName(),
-                item.getPrice(),
-                item.getDescription(),
-                item.getCreatedAt(),
-                item.getUpdatedAt()
-        );
+        return mapToItemResponse(item);
     }
 
     @Transactional(readOnly = true)
     public List<ItemResponse> getItems(GetItemsRequest request) {
         return itemQuerydslRepository.findAll(request).stream()
-                .map(item -> ItemResponse.from(
-                        item.getId(),
-                        item.getType(),
-                        item.getStatus(),
-                        item.getName(),
-                        item.getPrice(),
-                        item.getDescription(),
-                        item.getCreatedAt(),
-                        item.getUpdatedAt()
-                ))
+                .map(this::mapToItemResponse)
                 .toList();
     }
 
@@ -82,5 +64,18 @@ public class ItemService {
         itemRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("존재하지 않는 상품입니다."));
         itemRepository.deleteById(id);
+    }
+
+    private ItemResponse mapToItemResponse(Item item) {
+        return ItemResponse.from(
+                item.getId(),
+                item.getType(),
+                item.getStatus(),
+                item.getName(),
+                item.getPrice(),
+                item.getDescription(),
+                item.getCreatedAt(),
+                item.getUpdatedAt()
+        );
     }
 }

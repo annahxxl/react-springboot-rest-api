@@ -1,18 +1,18 @@
 package com.programmers.cafekiosk.service;
 
-import com.programmers.cafekiosk.dto.orderItem.CreateOrderItemRequest;
 import com.programmers.cafekiosk.dto.item.request.GetItemsRequest;
 import com.programmers.cafekiosk.dto.order.CreateOrderRequest;
 import com.programmers.cafekiosk.dto.order.OrderResponse;
+import com.programmers.cafekiosk.dto.orderItem.CreateOrderItemRequest;
 import com.programmers.cafekiosk.dto.orderItem.OrderItemResponse;
-import com.programmers.cafekiosk.entity.item.Item;
-import com.programmers.cafekiosk.entity.item.ItemStatus;
 import com.programmers.cafekiosk.entity.Order;
 import com.programmers.cafekiosk.entity.OrderItem;
+import com.programmers.cafekiosk.entity.item.Item;
+import com.programmers.cafekiosk.entity.item.ItemStatus;
 import com.programmers.cafekiosk.exception.NotFoundException;
-import com.programmers.cafekiosk.repository.item.ItemQuerydslRepository;
 import com.programmers.cafekiosk.repository.OrderItemRepository;
 import com.programmers.cafekiosk.repository.OrderRepository;
+import com.programmers.cafekiosk.repository.item.ItemQuerydslRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +28,6 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ItemQuerydslRepository itemQuerydslRepository;
-    private final OrderItemRepository orderItemRepository;
 
     @Autowired
     public OrderService(OrderRepository orderRepository, ItemQuerydslRepository itemQuerydslRepository, OrderItemRepository orderItemRepository) {
@@ -65,7 +64,7 @@ public class OrderService {
         Map<Long, Item> itemsMap = itemQuerydslRepository.findAll(new GetItemsRequest(null, ItemStatus.AVAILABLE, ids)).stream()
                 .collect(Collectors.toMap(Item::getId, item -> item));
 
-        if(itemsMap.size() != ids.size()) {
+        if (itemsMap.size() != ids.size()) {
             throw new NotFoundException("존재하지 않는 상품이 포함되어 있습니다.");
         }
 
